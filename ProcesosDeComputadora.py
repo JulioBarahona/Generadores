@@ -5,7 +5,7 @@ from math import *
 # name: Simulacion Sistema Operativo
 # Ram: memoria que consumiran los procesos
 
-class ProcesosDeComputadora(num ):
+class ProcesosDeComputadora(num):
     
     def _init_(self, env, num):
         self. memoria = simpy.Container(env, init = 100, capacity = 100)
