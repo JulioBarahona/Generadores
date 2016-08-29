@@ -5,7 +5,7 @@ Diego Castañeda
 Semana 8
 UVG
 """
-import simpy
+#import simpy
 import random
 from math import *
 
@@ -13,23 +13,15 @@ from math import *
 totalProcesses =  25;
 arrayProcesses = []
 
-# fills the array with aleatory memory requirements
-for i in range (0,totalProcesses):
-    arrayProcesses.append(int(random.randint(1,10)))
-    i = i + 1
-
-#shows array of random numbets (0,10), REMOVE?
-print arrayProcesses
-
-
 # Generates random memory requeired for a new program, takes away the local memory
 # Random 1-10
-def newArrayOfPrograms(arrayOfProccesses,numberOfPrograms):
-
-
-    while (i<numberOfPrograms):
+def newArrayOfPrograms(numberOfPrograms):
+   for i in numberOfPrograms:
         #generates random integer from 1 to 10
-        yield null
+        yield random.randint(1,10)
+
+for i in (newArrayOfPrograms(totalProcesses)):
+    print i
 
 # Process thats is run by CPU
 # random 1-10
