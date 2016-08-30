@@ -11,12 +11,12 @@ from math import *
 
 class SistemaOperativo:
     def __init__(self,env):
-        self.cpu = simpy.Resource(env, capacity = 1)
+        self.cpu = simpy.Resource(env, capacity = 2)
         self.memoria= simpy.Container(env,init=100, capacity = 100)
         self.average = 0
         
         # How many programs the CPU is gonna work
-        totalProcesses = 25;
+        totalProcesses = 25
         contador = 1
         intervalo = 10
 
