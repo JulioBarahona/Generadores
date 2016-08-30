@@ -13,7 +13,8 @@ class SistemaOperativo:
     def __init__(self,env):
         self.cpu = simpy.Resource(env, capacity = 1)
         self.memoria= simpy.Container(env,init=100, capacity = 100)
-
+        self.average = 0
+        
         # How many programs the CPU is gonna work
         totalProcesses = 25;
         contador = 1
@@ -39,6 +40,7 @@ class SistemaOperativo:
     def Simulacion(self, env, nombre, inicio, mem, instrucciones, respuesta):
 
         yield env.timeout(inicio)
+        tiempoInicial = env.now
         print('%s inicio a procesar en tiempo %d'%(nombre, env.now))
 
         yield self.memoria.get(mem)
@@ -54,7 +56,11 @@ class SistemaOperativo:
                     print ("Proceso %s sale de IO en tiempo %d"%(nombre,env.now))
 
         yield simular.memoria.put(mem)
-        print("Proceso %s termino en tiempo %d"%(nombre, env.now))
+        tiempoFinal = env.now
+        promedio = (tiempoFinal - tiempoInicial)/2
+        self.average = self.average + promedio
+        print("Proceso %s termino en tiempo %d, con promedio %d"%(nombre, env.now, promedio))
+        
 
 
 # Elementos de Simpy antes de comenzar a trabaajar
@@ -67,3 +73,6 @@ simular = SistemaOperativo(env)
 
 #iniciar hasta que se acaben los procesos
 env.run()
+promedial = simular.average
+resultado  = promedial/25
+print ("El promedio de tiempos de los procesos es de %d"%resultado)
